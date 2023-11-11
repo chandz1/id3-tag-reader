@@ -5,13 +5,13 @@ BIN_DIR = bin
 OBJ_DIR = obj
 INC_DIR = include
 TEMP_DIRS = $(BIN_DIR) $(OBJ_DIR)
-SRCS = $(wildcard $(SRC_DIR)/*.c)
+SRCS = $(filter-out $(SRC_DIR)/read.c, $(wildcard $(SRC_DIR)/*.c))
 BINS = $(patsubst $(SRC_DIR)/%.c, $(BIN_DIR)/%, $(SRCS))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 all:$(OBJS) $(BINS)
 
-$(BIN_DIR)/%: $(OBJ_DIR)/%.o | $(TEMP_DIRS)
+$(BIN_DIR)/%: $(OBJ_DIR)/%.o $(OBJ_DIR)/read.o | $(TEMP_DIRS)
 	$(CC) $(CFLAGS) $^ -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/%.h | $(TEMP_DIRS)
