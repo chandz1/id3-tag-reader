@@ -10,4 +10,4 @@ read.o: read.c read.h
 	$(CC) $(CFLAGS) -c $< -o $@ 
 
 clean:
-	-@rm -f main read
+	-@rm -f main read.o

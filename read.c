@@ -8,5 +8,9 @@ int open_and_read_file(char *file) {
         perror("fopen error");
         return -1;
     }
-    return 1;
+    if (fclose(mp3_file) != 0) {
+        perror("fclose error");
+        return -1;
+    }
+    return 0;
 }
